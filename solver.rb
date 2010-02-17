@@ -18,7 +18,7 @@ class Puzzle
 			nil
 		else
 			seen[to_s] = true
-			available_moves.reverse.
+			available_moves.
 				map { |piece| self.dup.move(*piece).solve(seen.dup) }.
 					compact.
 						sort_by{ |solution| solution.moves.size }.
