@@ -7,11 +7,11 @@ describe 'A Solved Puzzle' do
   end
 
   it 'should be solved' do
-    @puzzle.solved?.should be_true
+    @puzzle.solutions.first.solved?.should be_true
   end
 
   it 'should return a puzzle with no moves when solved' do
-    @puzzle.solve.moves.should == []
+    @puzzle.solutions.first.moves.should == []
   end
 
 end
@@ -19,7 +19,7 @@ end
 describe 'A one move puzzle' do
 	
 	before :each do
-    @puzzle = Puzzle.new([[1, 2, 3], [4, 5, 6], [nil, 7, 8]])
+    @puzzle = Puzzle.new([[1, 2, 3], [4, 5, 6], [7, nil, 8]])
   end
 
   it 'should not be solved' do
@@ -27,8 +27,12 @@ describe 'A one move puzzle' do
   end
 
   it 'should return a puzzle with moves when solved' do
-    @puzzle.solve.moves.count.should eql(1)
+    @puzzle.solutions.first.moves.count.should eql(1)
   end
+
+	it 'should have one solution' do
+		@puzzle.solutions.size.should eql(1)
+	end
 	
 end
 
@@ -39,11 +43,11 @@ describe 'An Unsolved Puzzle' do
   end
 
   it 'should not be solved' do
-    @puzzle.solved?.should_not be_true
+    @puzzle.solutions.first.solved?.should_not be_true
   end
 
   it 'should return a puzzle with moves when solved' do
-    @puzzle.solve.moves.count.should > 0
+    @puzzle.solutions.first.moves.count.should > 0
   end
 
 end
