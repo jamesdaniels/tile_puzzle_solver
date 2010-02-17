@@ -10,14 +10,26 @@ describe 'A Solved Puzzle' do
     @puzzle.solved?.should be_true
   end
 
-  it 'should have a solved_distance of zero' do
-    @puzzle.solved_distance.should == 0
-  end
-
   it 'should return a puzzle with no moves when solved' do
     @puzzle.solve.moves.should == []
   end
 
+end
+
+describe 'A one move puzzle' do
+	
+	before :each do
+    @puzzle = Puzzle.new([[1, 2, 3], [4, 5, 6], [nil, 7, 8]])
+  end
+
+  it 'should not be solved' do
+    @puzzle.solved?.should_not be_true
+  end
+
+  it 'should return a puzzle with moves when solved' do
+    @puzzle.solve.moves.count.should eql(1)
+  end
+	
 end
 
 describe 'An Unsolved Puzzle' do
@@ -28,10 +40,6 @@ describe 'An Unsolved Puzzle' do
 
   it 'should not be solved' do
     @puzzle.solved?.should_not be_true
-  end
-
-  it 'should have a solved_distance greater than zero' do
-    @puzzle.solved_distance.should > 0
   end
 
   it 'should return a puzzle with moves when solved' do
